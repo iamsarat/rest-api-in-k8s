@@ -37,7 +37,7 @@ jobs:
 
     steps:
       - name: kubectl
-        id: deploy
+        id: kubectl
         uses: azure/setup-kubectl@v3
 
       - name: deploy
