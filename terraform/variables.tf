@@ -13,6 +13,6 @@ variable "tags" {
   type        = map(string)
   default = {
     "team:name"  = "DevOps"
-    "team:owner" = "Sarat Koganti"
+    "team:owner" = "SK"
   }
 }
