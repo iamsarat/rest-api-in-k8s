@@ -58,5 +58,5 @@ jobs:
          kubectl set image deployment/rest-api-in-k8s-nginx nginx=${{ secrets.DOCKER_USR }}/rest-api-in-k8s:${{ github.ref_name }}-${{ github.sha }}
          kubectl rollout status -w deployment/rest-api-in-k8s-nginx
          export SERVICE_IP=$(kubectl get svc rest-api-in-k8s-nginx --template "{{ range (index .status.loadBalancer.ingress 0) }}{{.}}{{ end }}")
-         timeout 300 bash -c 'while [[ "$(curl --insecure -s -o /dev/null -w ''%{http_code}'' https://$SERVICE_IP:80)" != "200" ]]; do sleep 5; done'
+         timeout 300 bash -c 'while [[ "$(curl --insecure -s -o /dev/null -w ''%{http_code}'' http://$SERVICE_IP)" != "200" ]]; do sleep 5; done'
 
