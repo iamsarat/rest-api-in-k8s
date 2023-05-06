@@ -26,3 +26,11 @@ Trigger -
 1. Change in Dockerfile or in `rest/` folder
 2. A Push to `main` branch
 
+## Clean Up
+
+Run the following command to destroy all AWS resources created for this exercise -
+
+```shell
+cd terraform
+terraform destroy -auto-approve
+```
