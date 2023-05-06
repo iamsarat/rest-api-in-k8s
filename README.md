@@ -12,6 +12,7 @@
 Run the following commands to create AWS VPC, Subnets, NAT GW, Internet GW, Security Groups, EKS, IAM roles, IAM role policy attachments, Nodegroup, Run helm to deploy rest-api-in-k8s to EKS, test Classic LB DNS Name to check if API is up.
 
 ```shell
+cd terraform
 terraform init
 terraform plan
 terraform apply -auto-approve
