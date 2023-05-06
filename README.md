@@ -7,7 +7,7 @@
 * Install [helm](https://helm.sh/docs/intro/install/)
 * Install [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl)
 
-## Create Elastic Kubernetes Cluster (EKS) using Terraform
+## Create Elastic Kubernetes Service (EKS) Cluster using Terraform
 
 Run the following commands to create AWS VPC, Subnets, NAT GW, Internet GW, Security Groups, EKS, IAM roles, IAM role policy attachments, Nodegroup, Run helm to deploy rest-api-in-k8s to EKS, test Classic LB DNS Name to check if API is up.
 
@@ -17,7 +17,7 @@ terraform init
 terraform plan
 terraform apply -auto-approve
 ```
-## Continuous Integration and Continuous Delivery/Deployment (CICD) of the API
+## Continuous Integration and Continuous Delivery/Deployment (CICD)
 
 CI/CD process is configured using Github Actions and you can review the workflow in `.github/workflows/cicd.yml`
 
