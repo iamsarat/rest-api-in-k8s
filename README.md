@@ -18,7 +18,7 @@ terraform apply -auto-approve
 ```
 ## Continuous Integration and Continuous Delivery/Deployment (CICD) of the API
 
-CI/CD process is configured using Github Actions and you can review the workflow in `.github/workflows/cicd.yaml`
+CI/CD process is configured using Github Actions and you can review the workflow in `.github/workflows/cicd.yml`
 
 Trigger -
 
