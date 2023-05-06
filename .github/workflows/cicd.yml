@@ -2,7 +2,11 @@ name: Build, Publish and Deploy
 
 on: 
   push:
-    branches: [main]
+    branches:
+      - main
+    paths:
+      - 'rest/**'
+      - 'Dockerfile'
 
 jobs:
   build:
