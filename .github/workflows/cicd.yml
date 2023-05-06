@@ -29,7 +29,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: true
-          tags: ${{ secrets.DOCKER_USR }}/rest-api-in-k8s:${{ GITHUB_REF_NAME }}-$(git rev-parse --short ${{ github.sha }}), ${{ secrets.DOCKER_USR }}/rest-api-in-k8s:latest
+          tags: ${{ secrets.DOCKER_USR }}/rest-api-in-k8s:${{ github.ref_name }}-$(git rev-parse --short ${{ github.sha }}), ${{ secrets.DOCKER_USR }}/rest-api-in-k8s:latest
 
   deploy:
     name: Deploy Docker image to k8s
@@ -45,7 +45,7 @@ jobs:
         env:
           KUBECONFIG: ${{ secrets.KUBECONFIG }}
         run: |
-         kubectl set image deployment/rest-api-in-k8s-nginx nginx=${{ secrets.DOCKER_USR }}/rest-api-in-k8s:${{ GITHUB_REF_NAME }}-$(git rev-parse --short ${{ github.sha }})
+         kubectl set image deployment/rest-api-in-k8s-nginx nginx=${{ secrets.DOCKER_USR }}/rest-api-in-k8s:${{ github.ref_name }}-$(git rev-parse --short ${{ github.sha }})
          kubectl rollout status -w deployment/rest-api-in-k8s-nginx
          export SERVICE_IP=$(kubectl get svc --namespace default restapi-helm --template "{{ range (index .status.loadBalancer.ingress 0) }}{{.}}{{ end }}")
          timeout 300 bash -c 'while [[ "$(curl --insecure -s -o /dev/null -w ''%{http_code}'' https://$SERVICE_IP:80)" != "200" ]]; do sleep 5; done'
