@@ -2,7 +2,7 @@ from flask import Flask, request
 import json
 import time
 
-# create a Flask app.
+# create a Flask app
 rest = Flask(__name__)
 
 @rest.route('/', methods=['GET', 'POST', 'PUT'])
