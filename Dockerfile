@@ -8,6 +8,8 @@ WORKDIR /app
 
 RUN pipenv install --system --deploy && pipenv --clear
 
+EXPOSE 8080
+
 ENTRYPOINT ["python"]
 
 CMD ["./rest.py"]
