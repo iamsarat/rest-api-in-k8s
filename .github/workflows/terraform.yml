@@ -27,7 +27,7 @@ jobs:
 
       - name: Create s3 bucket for tfstate
         id: s3-bucket-create
-        run: aws s3api create-bucket --bucket demo-us-east-2-azby --region us-east-2  2>&1 > /dev/null
+        run: aws s3api create-bucket --bucket demo-us-east-2-azby --region us-east-2  --create-bucket-configuration LocationConstraint=us-east-2 2>&1 > /dev/null
 
       - name: Create dynamodb table for tfstate lock
         id: dynamodb-create
