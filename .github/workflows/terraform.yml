@@ -18,6 +18,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-2
+
       - name: Create s3 bucket for tfstate
         id: s3-bucket-create
         run: aws s3api create-bucket --bucket demo-us-east-2-azby --region us-east-2  2>&1 > /dev/null
@@ -101,6 +108,13 @@ jobs:
     needs: [terraform_destroy]
 
     steps:
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-2
+
       - name: Destroy dynamodb table for tfstate lock
         id: dynamodb-destroy
         run: aws dynamodb delete-table --table-name "demo-us-east-2-azby"  2>&1 > /dev/null
