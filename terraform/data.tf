@@ -19,8 +19,8 @@ data "http" "rest_api_in_k8s" {
   }
 
   retry {
-    attempts     = 10
-    min_delay_ms = 5
-    max_delay_ms = 10
+    attempts     = 50
+    min_delay_ms = 20
+    max_delay_ms = 30
   }
 }
