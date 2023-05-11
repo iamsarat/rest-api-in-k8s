@@ -1,5 +1,5 @@
 resource "aws_eks_cluster" "eks" {
-  name     = "demo"
+  name     = var.cluster_name
   role_arn = aws_iam_role.eks_iam_role.arn
 
   vpc_config {
@@ -9,9 +9,9 @@ resource "aws_eks_cluster" "eks" {
     public_access_cidrs     = ["0.0.0.0/0"]
   }
 
-  tags = merge(
-    var.tags
-  )
+  tags = {
+    Name = var.cluster_name
+  }
 
   depends_on = [
     aws_iam_role_policy_attachment.eks_iam_policy_attachment
@@ -20,7 +20,7 @@ resource "aws_eks_cluster" "eks" {
 
 
 resource "aws_iam_role" "eks_iam_role" {
-  name = "eks-demo-cluster-iam-role"
+  name = "eks-${var.cluster_name}-cluster-iam-role"
 
   assume_role_policy = <<POLICY
 {

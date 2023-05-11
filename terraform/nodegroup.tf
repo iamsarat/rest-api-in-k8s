@@ -15,9 +15,9 @@ resource "aws_eks_node_group" "eks_node_group" {
   disk_size      = 20
   instance_types = ["t2.micro"]
 
-  tags = merge(
-    var.tags
-  )
+  tags = {
+    Name = "${aws_eks_cluster.eks.name}-ng"
+  }
 
   depends_on = [
     aws_iam_role_policy_attachment.eks_node_iam_policy,
@@ -27,7 +27,7 @@ resource "aws_eks_node_group" "eks_node_group" {
 }
 
 resource "aws_iam_role" "eks_node_iam_role" {
-  name = "eks-node-group-demo-cluster-iam-role"
+  name = "eks-node-group-${var.cluster_name}-cluster-iam-role"
 
   assume_role_policy = <<POLICY
 {
