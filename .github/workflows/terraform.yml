@@ -33,6 +33,33 @@ jobs:
         id: dynamodb-create
         run: aws dynamodb create-table --table-name "demo-us-east-2-azby" --attribute-definitions "AttributeName=LockID,AttributeType=S" --key-schema "AttributeName=LockID,KeyType=HASH" --provisioned-throughput "ReadCapacityUnits=5,WriteCapacityUnits=5"  2>&1 > /dev/null
 
+  build_push:
+    name: Build and Push Docker image for rest-api-in-k8s
+    if: inputs.tf_action == 'apply'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set docker buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Dockerhub login
+        id: login
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USR }}
+          password: ${{ secrets.DOCKER_PWD }}
+
+      - name: Docker build and push
+        id: build
+        uses: docker/build-push-action@v4
+        with:
+          push: true
+          tags: ${{ secrets.DOCKER_USR }}/rest-api-in-k8s:latest
+
   terraform_create:
     name: Run Terraform
     if: inputs.tf_action == 'apply'
