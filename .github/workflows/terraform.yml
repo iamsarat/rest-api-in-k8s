@@ -11,10 +11,6 @@ on:
         - apply
         - destroy
 
-defaults:
-  run:
-    working-directory: ./terraform
-
 jobs:
   create_s3_dynamodb:
     name: create s3 and dynamodb tables for tf
